@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 1 讲：Grounded AI for Transportation | 同济大学</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/theme/white.css">
+  <style>
+    :root {
+      --tongji-blue: #003c71;
+      --tongji-blue-light: #1e5aa8;
+      --accent: #ffa502;
+    }
+    .reveal {
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+      font-size: 28px;
+      color: #2c3e50;
+    }
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: var(--tongji-blue);
+      font-weight: 700;
+    }
+    .reveal h1 { font-size: 2.2em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal h3 { font-size: 1.2em; }
+    .reveal .slides section {
+      text-align: left;
+    }
+    .reveal section.center {
+      text-align: center;
+    }
+    .reveal .title-slide {
+      background: linear-gradient(135deg, var(--tongji-blue) 0%, var(--tongji-blue-light) 100%);
+      color: white;
+    }
+    .reveal .title-slide h1, .reveal .title-slide h2, .reveal .title-slide h3 {
+      color: white;
+    }
+    .reveal code {
+      background: #f4f4f4;
+      color: #c7254e;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Menlo', 'Monaco', monospace;
+    }
+    .reveal pre {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .reveal pre code {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      max-height: 600px;
+    }
+    .reveal .tag {
+      display: inline-block;
+      background: var(--tongji-blue);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 0.7em;
+      margin: 0 4px;
+    }
+    .reveal .tag.yellow { background: var(--accent); }
+    .reveal .tag.green { background: #26de81; color: #2c3e50; }
+    .reveal .tag.red { background: #ff4757; }
+    .reveal table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 16px 0;
+    }
+    .reveal th, .reveal td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 0.8em;
+    }
+    .reveal th {
+      background: var(--tongji-blue);
+      color: white;
+    }
+    .reveal .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .reveal .card {
+      background: #f8f9fa;
+      border-left: 4px solid var(--tongji-blue);
+      padding: 16px 20px;
+      border-radius: 4px;
+    }
+    .reveal .card.green { border-color: #26de81; }
+    .reveal .card.red { border-color: #ff4757; }
+    .reveal .card.yellow { border-color: var(--accent); }
+    .reveal .emoji { font-size: 1.4em; }
+    .reveal .footer {
+      position: absolute;
+      bottom: 12px;
+      left: 20px;
+      font-size: 0.4em;
+      color: #888;
+    }
+    .reveal .progress {
+      color: var(--tongji-blue);
+    }
+    .reveal .slide-number {
+      font-size: 12px;
+      color: var(--tongji-blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 封面 -->
+      <section class="center title-slide" data-background-gradient="linear-gradient(135deg, #003c71, #1e5aa8)">
+        <h1 style="font-size:1.6em">🚦 大模型驱动的城市交通治理技术</h1>
+        <h2 style="font-size:0.9em; margin-top: 30px;">第 1 讲：Grounded AI for Transportation</h2>
+        <p style="margin-top: 60px; font-size: 0.7em;">同济大学交通学院 · 李健 · 2026 秋季</p>
+        <p style="font-size: 0.4em; margin-top: 40px;">2026 年 9 月 18 日 · 嘉定校区 C208</p>
+        <p class="footer">v1.0 · 第 1 讲 Grounded AI 导论</p>
+      </section>
+
+      <!-- 引子：先问一个问题 -->
+      <section class="center" data-background-color="#fff8e1">
+        <h2>先问一个问题</h2>
+        <div style="background: #fff; padding: 30px; border-radius: 12px; margin-top: 40px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+          <p style="font-size: 0.9em; line-height: 1.6;">
+            如果你是一名交通管理者，<br>
+            凌晨 3 点收到一份 <b>200 页</b> 的城市交通运行报告，<br>
+            你会怎么办？
+          </p>
+        </div>
+      </section>
+
+      <!-- 对比 -->
+      <section>
+        <h2>你会怎么办？</h2>
+        <div class="grid-2" style="margin-top: 30px;">
+          <div class="card">
+            <h3 style="color:#2c3e50;">传统方式</h3>
+            <ul style="font-size:0.75em;">
+              <li>喝杯咖啡 ⏰</li>
+              <li>通读报告 📑</li>
+              <li>摘出关键指标 ✍️</li>
+              <li>撰写摘要 ⏰</li>
+              <li>写给领导决策 📧</li>
+            </ul>
+            <p style="color:#ff4757; font-size:0.8em; margin-top: 16px;"><b>耗时 3-4 小时</b></p>
+          </div>
+          <div class="card green">
+            <h3 style="color:#2c3e50;">LLM 时代</h3>
+            <ul style="font-size:0.75em;">
+              <li>把 PDF 丢给 ChatGPT 📤</li>
+              <li>30 秒生成摘要 ⚡</li>
+              <li>自动提取关键指标 🤖</li>
+              <li>标注数据来源 📊</li>
+              <li>生成决策建议 💡</li>
+            </ul>
+            <p style="color:#26de81; font-size:0.8em; margin-top: 16px;"><b>耗时 3 分钟</b></p>
+          </div>
+        </div>
+        <div class="card red" style="margin-top: 24px; text-align: center;">
+          <p style="font-size: 0.8em;">⚠️ <b>但如果 LLM 编造数据呢？</b><br>
+          如果它说"外滩早高峰 8:30 拥堵指数 7.2"——<b>这是真的吗？</b></p>
+        </div>
+      </section>
+
+      <!-- Grounded AI 中心问题 -->
+      <section class="center" data-background-color="#f0f4ff">
+        <h1 style="font-size: 1.5em;">这就是 Grounded AI 要解决的问题</h1>
+        <div style="margin-top: 60px; font-size: 0.85em; line-height: 1.8;">
+          <p>让 LLM 说的每一句话</p>
+          <p style="margin-top: 20px; color: #ff4757; font-size: 1.3em; font-weight: 800;">都能 <b>追溯到真实数据</b></p>
+          <p style="margin-top: 20px;">而不是凭空捏造</p>
+        </div>
+      </section>
+
+      <!-- Part 1 分隔 -->
+      <section data-background-color="#003c71">
+        <h1 style="color: white; font-size: 2em;">Part 1</h1>
+        <h2 style="color: white; font-size: 1.2em; margin-top: 20px;">为什么是现在？</h2>
+        <p class="footer" style="color: rgba(255,255,255,0.5);">AI 的三波浪潮</p>
+      </section>
+
+      <!-- AI 三波浪潮 -->
+      <section>
+        <h2>AI 的三波浪潮</h2>
+        <div class="grid-2" style="margin-top: 20px;">
+          <div class="card">
+            <h3>🌊 第一波：Chat 模型</h3>
+            <p style="font-size:0.6em; color:#888; margin-top: 8px;">2022 - 2023</p>
+            <ul style="font-size:0.65em; margin-top: 12px;">
+              <li>ChatGPT (2022.11)</li>
+              <li>GPT-4 (2023.03)</li>
+              <li>Claude (2023.03)</li>
+            </ul>
+            <p style="font-size:0.65em; margin-top: 12px;"><b>能力</b>：对话、写作、翻译</p>
+            <p style="font-size:0.65em;"><b>交通应用</b>：客服、文案</p>
+          </div>
+          <div class="card yellow">
+            <h3>🧠 第二波：推理模型</h3>
+            <p style="font-size:0.6em; color:#888; margin-top: 8px;">2024 - 2025</p>
+            <ul style="font-size:0.65em; margin-top: 12px;">
+              <li>OpenAI o1 (2024.09)</li>
+              <li>DeepSeek R1 (2025.01)</li>
+              <li>Claude Extended Thinking</li>
+            </ul>
+            <p style="font-size:0.65em; margin-top: 12px;"><b>能力</b>：慢思考、复杂推理</p>
+            <p style="font-size:0.65em;"><b>交通应用</b>：路径规划、调度优化</p>
+          </div>
+          <div class="card red" style="grid-column: span 2;">
+            <h3 style="text-align:center;">🤖 第三波：自主 Agent</h3>
+            <p style="font-size:0.6em; color:#888; text-align:center; margin-top: 8px;">2025 -</p>
+            <p style="font-size:0.7em; text-align:center; margin-top: 12px;">
+              <b>代表</b>：Devin (2024.12) · Manus (2025.03) · OpenAI Operator (2025.01)
+            </p>
+            <p style="font-size:0.65em; text-align:center; margin-top: 8px;">
+              <b>能力</b>：自主规划、工具使用 ·
+              <b>交通应用</b>：交通治理 Copilot
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 范式转移 -->
+      <section>
+        <h2>AI 范式的三次转移</h2>
+        <div style="margin-top: 60px;">
+          <table>
+            <thead>
+              <tr><th>时代</th><th>核心能力</th><th>代表</th><th>交通场景</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2010s</td><td>感知智能</td><td>图像识别 / 语音识别</td><td>监控视频解析</td></tr>
+              <tr><td>2020s</td><td>认知智能</td><td>LLM 对话 / 知识推理</td><td>法规问答 / 报告生成</td></tr>
+              <tr style="background: #fff3cd;">
+                <td><b>2025+</b></td>
+                <td><b>行动智能</b></td>
+                <td><b>Agent 执行 / 多智能体协作</b></td>
+                <td><b>应急调度 / 协同决策</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align:center; margin-top: 30px; font-size:0.85em;">
+          交通领域正在经历从 <b>感知 → 认知 → 行动</b> 的全面重塑
+        </p>
+      </section>
+
+      <!-- 4 类角色 -->
+      <section>
+        <h2>LLM 介入交通的 4 类角色</h2>
+        <table style="margin-top: 30px;">
+          <thead>
+            <tr><th>角色</th><th>类比</th><th>典型任务</th><th>关键能力</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🗣 <b>助手</b></td><td>副驾驶</td><td>报告生成、解释</td><td>对话、文案</td></tr>
+            <tr><td>🧭 <b>规划器</b></td><td>调度长</td><td>路径规划、信号配时</td><td>推理、工具调用</td></tr>
+            <tr><td>🔍 <b>评估器</b></td><td>审计员</td><td>异常归因、影响评估</td><td>评测、对比</td></tr>
+            <tr><td>🤝 <b>协调器</b></td><td>交通指挥</td><td>多方协商、应急调度</td><td>多智能体</td></tr>
+          </tbody>
+        </table>
+        <div class="card yellow" style="margin-top: 30px;">
+          <p style="font-size: 0.8em; text-align: center;">💡 真实场景中，这 4 类角色往往<b>协同工作</b>，而不是单一使用</p>
+        </div>
+      </section>
+
+      <!-- Part 2 -->
+      <section data-background-color="#003c71">
+        <h1 style="color: white; font-size: 2em;">Part 2</h1>
+        <h2 style="color: white; font-size: 1.2em; margin-top: 20px;">为什么是交通？</h2>
+      </section>
+
+      <!-- 老问题 -->
+      <section>
+        <h2>城市交通的"老问题"</h2>
+        <div class="grid-2" style="margin-top: 30px;">
+          <div class="card red">
+            <h3>🚗 拥堵</h3>
+            <p style="font-size:0.7em;">北京/上海年均通勤时间 40+ 分钟</p>
+            <p style="font-size:0.7em;">每年因拥堵损失 GDP 1-2%</p>
+          </div>
+          <div class="card yellow">
+            <h3>⚠️ 安全</h3>
+            <p style="font-size:0.7em;">全球每年 130 万人死于交通事故</p>
+            <p style="font-size:0.7em;">90% 事故由人为因素导致</p>
+          </div>
+          <div class="card green">
+            <h3>🌱 低碳</h3>
+            <p style="font-size:0.7em;">交通占全球碳排放 16%</p>
+            <p style="font-size:0.7em;">私家车通勤占 75%</p>
+          </div>
+          <div class="card">
+            <h3>⚖️ 公平</h3>
+            <p style="font-size:0.7em;">老年人、残疾人出行难</p>
+            <p style="font-size:0.7em;">郊区 vs 中心城区服务差异</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 过去 20 年 AI 方案 -->
+      <section>
+        <h2>过去 20 年的 AI 方案</h2>
+        <table style="margin-top: 30px;">
+          <thead>
+            <tr><th>阶段</th><th>时间</th><th>主要方法</th><th>解决问题</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. 统计学习</td><td>2000-2010</td><td>ARIMA、SVM</td><td>流量预测</td></tr>
+            <tr><td>2. 深度学习</td><td>2010-2020</td><td>CNN、RNN、GCN</td><td>感知、预测</td></tr>
+            <tr><td>3. 强化学习</td><td>2015-2025</td><td>DQN、PPO</td><td>信号控制、调度</td></tr>
+            <tr style="background: #fff3cd;">
+              <td><b>4. 大模型</b></td>
+              <td><b>2023-</b></td>
+              <td><b>Transformer、LLM</b></td>
+              <td><b>通用推理、生成</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="card yellow" style="margin-top: 30px;">
+          <p style="font-size: 0.8em; text-align: center;">
+            🤔 <b>问题</b>：前 3 阶段解决了<b>单点问题</b>，但缺少<b>跨任务协同</b><br>
+            LLM 提供了<b>通用接口</b>，可能是范式突破
+          </p>
+        </div>
+      </section>
+
+      <!-- LLM vs 传统 AI -->
+      <section>
+        <h2>LLM vs 传统 AI 在交通中的差异</h2>
+        <table style="margin-top: 30px;">
+          <thead>
+            <tr><th>维度</th><th>传统 AI</th><th>LLM</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>数据需求</td><td>大量标注</td><td>少量样本甚至零样本</td></tr>
+            <tr><td>任务通用性</td><td>单任务专用</td><td>一个模型多任务</td></tr>
+            <tr><td>推理能力</td><td>模式匹配</td><td>复杂逻辑推理</td></tr>
+            <tr><td>可解释性</td><td>黑盒</td><td>自然语言解释</td></tr>
+            <tr><td>知识更新</td><td>重新训练</td><td>检索增强 (RAG)</td></tr>
+            <tr><td>与人交互</td><td>API 调用</td><td>自然语言</td></tr>
+          </tbody>
+        </table>
+        <div class="card red" style="margin-top: 30px;">
+          <p style="font-size: 0.8em; text-align: center;">
+            ⚠️ <b>但 LLM 不是万能的</b>：<br>
+            幻觉问题 · 实时性差 · 缺乏领域知识 · 难以做精确数值计算
+          </p>
+        </div>
+      </section>
+
+      <!-- Part 3 - Grounded AI -->
+      <section data-background-color="#003c71">
+        <h1 style="color: white; font-size: 2em;">Part 3</h1>
+        <h2 style="color: white; font-size: 1.2em; margin-top: 20px;">Grounded AI</h2>
+        <p style="color: white; margin-top: 20px; font-size: 0.8em;">课程主线条 · 解决 LLM 的核心问题</p>
+      </section>
+
+      <!-- 什么是 Grounded AI -->
+      <section>
+        <h2>什么是 Grounded AI？</h2>
+        <div class="card" style="margin-top: 40px; padding: 30px;">
+          <p style="font-size: 0.85em; line-height: 1.8;">
+            AI 的输出必须 <b style="color: #ff4757;">扎根真实世界</b>——<br>
+            数据、知识、上下文、人类反馈。
+          </p>
+          <p style="text-align: right; margin-top: 20px; font-size: 0.65em; color: #888;">
+            — Prof. Jinhua Zhao, MIT
+          </p>
+        </div>
+        <div class="card yellow" style="margin-top: 30px;">
+          <h3>与"幻觉 (Hallucination)"的关系</h3>
+          <table style="margin-top: 12px; font-size: 0.8em;">
+            <tr><th></th><th>不 Grounded</th><th>Grounded</th></tr>
+            <tr><td>现象</td><td>LLM 自由发挥</td><td>LLM 引用数据</td></tr>
+            <tr><td>风险</td><td>编造事实</td><td>错误可追溯</td></tr>
+            <tr><td>信任</td><td>无法验证</td><td>可审计</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- 三层架构 -->
+      <section>
+        <h2>Grounded AI 的三层架构</h2>
+        <div style="margin-top: 40px; text-align: center;">
+          <div class="card" style="display: inline-block; margin: 8px; min-width: 200px; border-left: 4px solid #ff4757;">
+            <h3>数据接地</h3>
+            <p style="font-size: 0.6em;">实时数据 API</p>
+            <p style="font-size: 0.6em; color: #888;">路网、流量、信号</p>
+          </div>
+          <div class="card" style="display: inline-block; margin: 8px; min-width: 200px; border-left: 4px solid #1e88e5;">
+            <h3>知识接地</h3>
+            <p style="font-size: 0.6em;">知识图谱</p>
+            <p style="font-size: 0.6em; color: #888;">法规、规范、案例</p>
+          </div>
+          <div class="card green" style="display: inline-block; margin: 8px; min-width: 200px; border-left: 4px solid #26de81;">
+            <h3>反馈接地</h3>
+            <p style="font-size: 0.6em;">Human-in-the-Loop</p>
+            <p style="font-size: 0.6em; color: #888;">专家审核、市民反馈</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 30px; text-align: center;">
+          <p style="font-size: 0.9em;">用户问题 → LLM → <b style="color: var(--tongji-blue);">三层接地</b> → 有据可查的回答</p>
+        </div>
+      </section>
+
+      <!-- 5 个例子 -->
+      <section>
+        <h2>Grounded 在交通的 5 个例子</h2>
+        <table style="margin-top: 30px; font-size: 0.7em;">
+          <thead>
+            <tr><th>场景</th><th>不 Grounded</th><th>Grounded</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>"上海哪条路最堵"</td><td>LLM 自由回答</td><td>引用高德实时数据 API</td></tr>
+            <tr><td>"为什么这个信号配时这样设置"</td><td>编造理由</td><td>引用 GB 25280 规范 + 历史日志</td></tr>
+            <tr><td>"这个事故原因是什么"</td><td>通用回答</td><td>检索类似事故归因报告</td></tr>
+            <tr><td>"这个出行方案公平吗"</td><td>模糊回答</td><td>接入公平性指标 benchmark</td></tr>
+            <tr><td>"模型预测准不准"</td><td>凭感觉</td><td>接入 LLM-as-Judge 评测</td></tr>
+          </tbody>
+        </table>
+        <p style="text-align:center; margin-top: 30px; font-size:0.9em;">
+          💡 <b>核心区别</b>：Grounded 让 AI 从<b>能聊</b>变成<b>能信</b>
+        </p>
+      </section>
+
+      <!-- Part 4 - 12 讲地图 -->
+      <section data-background-color="#003c71">
+        <h1 style="color: white; font-size: 2em;">Part 4</h1>
+        <h2 style="color: white; font-size: 1.2em; margin-top: 20px;">12 讲地图</h2>
+      </section>
+
+      <!-- 12 讲 -->
+      <section>
+        <h2>12 讲全景</h2>
+        <div style="margin-top: 20px;">
+          <table style="font-size: 0.65em;">
+            <thead>
+              <tr><th>讲</th><th>主题</th><th>核心技术</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>导论：Grounded AI</td><td>AI Native 哲学 / 三波浪潮</td></tr>
+              <tr><td>2</td><td>LLM 内部机理</td><td>Transformer / SFT / RLHF / DPO</td></tr>
+              <tr><td>3</td><td>推理大模型</td><td>o1 / R1 / Test-Time Compute</td></tr>
+              <tr><td>4</td><td>Prompt 与适配</td><td>Few-shot / LoRA / 模型选型</td></tr>
+              <tr><td>5</td><td>RAG 进阶</td><td>向量库 / 知识图谱 / Agentic RAG</td></tr>
+              <tr><td>6</td><td>Agent</td><td>ReAct / LangGraph / Harness</td></tr>
+              <tr><td>7</td><td>多智能体</td><td>CrewAI / Generative Agents / SUMO</td></tr>
+              <tr><td>8</td><td>多模态 VLM</td><td>VLM / VLA / 长视频</td></tr>
+              <tr><td>9</td><td>端到端 AD + 世界模型</td><td>UniAD / FSD V12 / GAIA-1 / CARLA</td></tr>
+              <tr><td>10</td><td>治理全景图</td><td>监测/规划/服务/应急/决策</td></tr>
+              <tr><td>11</td><td>评测</td><td>LLM-as-Judge / 交通 Benchmark</td></tr>
+              <tr><td>12</td><td>治理与前沿</td><td>幻觉 / 隐私 / 算法公平</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5 类能力 -->
+      <section>
+        <h2>12 讲对应 5 类能力</h2>
+        <table style="margin-top: 30px; font-size: 0.8em;">
+          <thead>
+            <tr><th>能力</th><th>对应讲次</th><th>关键问题</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🧠 <b>理解机理</b></td><td>2, 3</td><td>LLM 到底怎么工作？</td></tr>
+            <tr><td>🛠 <b>掌握工具</b></td><td>4, 5, 6</td><td>怎么让 LLM 接外部世界？</td></tr>
+            <tr><td>👥 <b>协同智能</b></td><td>7, 8, 9</td><td>怎么让多个 LLM 一起工作？</td></tr>
+            <tr><td>🏙 <b>落地场景</b></td><td>10</td><td>在交通治理的全景图是什么？</td></tr>
+            <tr><td>🔍 <b>评估反思</b></td><td>11, 12</td><td>怎么知道它答得对？</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Part 5 - 课程安排 -->
+      <section data-background-color="#003c71">
+        <h1 style="color: white; font-size: 2em;">Part 5</h1>
+        <h2 style="color: white; font-size: 1.2em; margin-top: 20px;">课程安排</h2>
+      </section>
+
+      <!-- 考核方式 -->
+      <section>
+        <h2>考核方式</h2>
+        <table style="margin-top: 30px;">
+          <thead>
+            <tr><th>项目</th><th>占比</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>课堂作业</td><td>30%</td><td>8 次 × 5-10 分</td></tr>
+            <tr><td>Recitation Lab</td><td>20%</td><td>4 次实验</td></tr>
+            <tr><td>期末项目</td><td>40%</td><td>3 人一组</td></tr>
+            <tr><td>期末反思</td><td>10%</td><td>1 页</td></tr>
+          </tbody>
+        </table>
+        <div class="card" style="margin-top: 24px;">
+          <h3 style="color: var(--tongji-blue);">关键节点</h3>
+          <ul style="font-size: 0.75em;">
+            <li><b>W6</b>：项目 Proposal 提交（10/30）</li>
+            <li><b>W10</b>：项目中期汇报（11/27）</li>
+            <li><b>W15</b>：项目终期汇报（1/8）</li>
+            <li><b>W16</b>：成绩评定（1/15）</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- AI 政策 -->
+      <section>
+        <h2>AI 使用政策：Allowed with disclosure</h2>
+        <div class="card" style="margin-top: 24px; background: #fff8e1;">
+          <p style="font-size: 0.85em; font-style: italic;">
+            "教 GenAI 的课，禁止用 GenAI 是矛盾的。"
+          </p>
+          <p style="text-align: right; font-size: 0.7em; color: #888;">
+            — Prof. Seongjin Choi, UMN
+          </p>
+        </div>
+        <div class="grid-2" style="margin-top: 24px;">
+          <div class="card green">
+            <h3>✅ 允许</h3>
+            <ul style="font-size:0.7em;">
+              <li>Cursor/Copilot 写 boilerplate</li>
+              <li>让 GPT-4 帮你 debug</li>
+              <li>头脑风暴</li>
+              <li>文献翻译</li>
+              <li>数据分析代码</li>
+            </ul>
+          </div>
+          <div class="card red">
+            <h3>❌ 禁止</h3>
+            <ul style="font-size:0.7em;">
+              <li>完全代写作业</li>
+              <li>让 AI 完成考试</li>
+              <li>抄袭 AI 内容不披露</li>
+              <li>假装 AI 观点是你自己的</li>
+            </ul>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 20px; font-size: 0.9em;">
+          📋 <b>必须</b>：每次作业附 <code>.ai-disclosure.md</code>
+        </p>
+      </section>
+
+      <!-- 推荐阅读 -->
+      <section>
+        <h2>推荐阅读（Week 1）</h2>
+        <div style="margin-top: 20px; font-size: 0.7em;">
+          <p><b>必读</b>：</p>
+          <ol>
+            <li><b>Nie, T., Sun, J., & Ma, W. (2025)</b>. <i>Exploring the roles of large language models in reshaping transportation systems</i>. AI for Transportation.</li>
+            <li><b>Choi, S. et al. (2025)</b>. <i>A gentle introduction and tutorial on deep generative models in transportation research</i>. TR-C.</li>
+            <li><b>Vaswani et al. (2017)</b>. <i>Attention Is All You Need</i>. NeurIPS.</li>
+          </ol>
+          <p style="margin-top: 16px;"><b>选读</b>：</p>
+          <ul>
+            <li>Jinhua Zhao, "Mens, Manus and Machina" 研究框架</li>
+            <li>OpenAI o1 系统报告</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 课堂演示 -->
+      <section data-background-color="#f0f4ff">
+        <h2>课堂演示：Grounded QA</h2>
+        <div style="margin-top: 30px;">
+          <h3>目标</h3>
+          <p style="font-size: 0.75em;">让 LLM 生成"上海早高峰拥堵"分析，<b>每个数据点都能追溯到原始报告</b></p>
+          <h3 style="margin-top: 20px;">步骤</h3>
+          <ol style="font-size: 0.7em;">
+            <li>准备《2025 上海交通运行年度报告》PDF</li>
+            <li>用 RAG 把 PDF 切片、向量化</li>
+            <li>让 LLM 回答："上海外滩早高峰几点最堵？为什么？"</li>
+            <li>验证：每个数据点都能找到 PDF 原文章节</li>
+          </ol>
+          <h3 style="margin-top: 20px;">预期结果</h3>
+          <table style="font-size: 0.7em;">
+            <tr><td>不 Grounded</td><td>LLM 编造数据</td></tr>
+            <tr style="background: #d4edda;"><td>Grounded</td><td>每个数据带 <code>[1] 报告 P.23</code> 引用</td></tr>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 24px; font-size: 0.7em; color: #888;">
+          💻 完整代码：<code>lectures/01-introduction/demo/grounded_qa.py</code>
+        </p>
+      </section>
+
+      <!-- 作业 0 -->
+      <section data-background-color="#fff8e1">
+        <h2>HW 0：选定你的研究问题</h2>
+        <div style="margin-top: 30px;">
+          <h3>任务</h3>
+          <p style="font-size: 0.75em;">
+            选定一个你关注的交通子领域，提交 1 段"问题陈述 + 数据来源"（≤500 字）
+          </p>
+          <h3 style="margin-top: 20px;">提交方式</h3>
+          <ul style="font-size: 0.7em;">
+            <li>Fork 本仓库</li>
+            <li>在 <code>assignments/hw0-proposal/</code> 下创建 <code>{your-name}.md</code></li>
+            <li>提交 Pull Request</li>
+          </ul>
+          <h3 style="margin-top: 20px;">评分（5 分）</h3>
+          <table style="font-size: 0.7em;">
+            <tr><td>问题清晰度</td><td>2</td></tr>
+            <tr><td>数据可获得性</td><td>2</td></tr>
+            <tr><td>Grounded 程度</td><td>1</td></tr>
+          </table>
+          <p style="margin-top: 20px; text-align: center; color: #ff4757;">
+            <b>截止：W2 课程结束前（9/25）</b>
+          </p>
+        </div>
+      </section>
+
+      <!-- Q&A -->
+      <section class="center">
+        <h1 style="font-size: 2.5em;">Q & A</h1>
+        <p style="margin-top: 50px; font-size: 0.8em;">
+          任何关于课程安排、政策、项目的问题，欢迎现在提出
+        </p>
+        <div style="margin-top: 40px; font-size: 0.55em; color: #888;">
+          <p>📧 Email: lijian@tongji.edu.cn</p>
+          <p>💬 GitHub Discussions: <a href="https://github.com/runningjian-ui/tongji-llm-urban-transport/discussions">讨论区</a></p>
+          <p>🕐 Office Hour: 周三 19:00-21:00</p>
+        </div>
+      </section>
+
+      <!-- 结束页 -->
+      <section class="center title-slide">
+        <h2 style="font-size: 1.4em;">🚦 让我们开始这段旅程</h2>
+        <p style="margin-top: 40px; font-size: 0.8em;">
+          下一讲：<b>第 2 讲 · LLM 内部机理</b><br>
+          从 Tokenization 到 RLHF，理解大模型是怎么"思考"的
+        </p>
+        <p class="footer" style="color: rgba(255,255,255,0.5);">本课件采用 reveal.js · CC-BY-SA-4.0</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      slideNumber: 'c/t',
+      pdfSeparateFragments: false,
+    });
+  </script>
+</body>
+</html>
