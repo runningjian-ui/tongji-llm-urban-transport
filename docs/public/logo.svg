@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#003c71"/>
+      <stop offset="100%" stop-color="#1e5aa8"/>
+    </linearGradient>
+    <linearGradient id="lightOn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景圆角矩形（深蓝渐变） -->
+  <rect x="6" y="6" width="108" height="108" rx="24" fill="url(#bg)"/>
+
+  <!-- 交通信号灯外框 -->
+  <rect x="40" y="22" width="40" height="76" rx="8" fill="#1a2942" stroke="#ffffff" stroke-width="1.5" opacity="0.95"/>
+
+  <!-- 红灯 -->
+  <circle cx="60" cy="40" r="9" fill="#ff4757"/>
+  <circle cx="60" cy="40" r="9" fill="url(#lightOn)"/>
+
+  <!-- 黄灯 -->
+  <circle cx="60" cy="60" r="9" fill="#ffa502" opacity="0.6"/>
+
+  <!-- 绿灯 -->
+  <circle cx="60" cy="80" r="9" fill="#26de81" opacity="0.6"/>
+
+  <!-- AI 神经网络节点（暗示 LLM） -->
+  <g opacity="0.85">
+    <!-- 左侧节点 -->
+    <circle cx="22" cy="40" r="3" fill="#ffffff"/>
+    <circle cx="22" cy="60" r="3" fill="#ffffff"/>
+    <circle cx="22" cy="80" r="3" fill="#ffffff"/>
+
+    <!-- 连线（左节点到灯） -->
+    <line x1="25" y1="40" x2="40" y2="40" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+    <line x1="25" y1="60" x2="40" y2="60" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+    <line x1="25" y1="80" x2="40" y2="80" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+
+    <!-- 右侧节点 -->
+    <circle cx="98" cy="50" r="3" fill="#ffffff"/>
+    <circle cx="98" cy="70" r="3" fill="#ffffff"/>
+
+    <!-- 连线（灯到右节点） -->
+    <line x1="80" y1="60" x2="95" y2="50" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+    <line x1="80" y1="60" x2="95" y2="70" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- 底部 LLM 文字 -->
+  <text x="60" y="112" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="700" font-family="Inter, sans-serif" letter-spacing="1.5">LLM × TJ</text>
+</svg>
