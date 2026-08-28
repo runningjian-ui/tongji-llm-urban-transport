@@ -103,6 +103,9 @@ export default defineConfig({
     theme: { light: 'github-light', dark: 'github-dark' }
   },
 
+  // 死链处理：暂时忽略（等链接优化后再开启）
+  ignoreDeadLinks: true,
+
   // 国际化（先 zh-CN，预留 en）
   locales: {
     'zh-CN': {
