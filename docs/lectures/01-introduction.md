@@ -8,7 +8,7 @@
 
 ## 🎬 课件
 
-- 📊 **在线课件**（reveal.js）：[lecture-01-slides.html](/lecture-01-slides.html) · 按 → 翻页 · 按 F 全屏
+- 📊 **在线课件**（reveal.js）：[**第 1 讲课件（新窗口打开）**](https://runningjian-ui.github.io/tongji-llm-urban-transport/lecture-01-slides.html) · 按 → 翻页 · 按 F 全屏
 - 📝 **Slidev 源文件**：[GitHub 仓库](https://github.com/runningjian-ui/tongji-llm-urban-transport/tree/main/lectures/01-introduction/slides)
 - 💻 **演示代码**：[grounded_qa.py](https://github.com/runningjian-ui/tongji-llm-urban-transport/blob/main/lectures/01-introduction/demo/grounded_qa.py)
 
