@@ -7,6 +7,8 @@ export default defineConfig({
   lang: 'zh-CN',
   lastUpdated: true,
   cleanUrls: true,
+  // GitHub Pages 子路径
+  base: '/tongji-llm-urban-transport/',
 
   // GitHub 信息
   // @ts-ignore
