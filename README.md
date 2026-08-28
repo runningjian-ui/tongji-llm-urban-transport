@@ -74,7 +74,7 @@ subtitle: Grounded LLM for Urban Transportation @ Tongji University
 - 所有 LLM 输出必须能追溯到来源
 - 评测环节（第 11 讲）专门设计交通领域 Benchmark
 
-### 3. 国际对标 + 本土实践
+### 3. 学术根基 + 本土实践
 - 参考 MIT UAI、UMN、SJTU 等国际一流课程
 - 案例覆盖上海/北京/深圳/雄安真实场景
 - 与同济交通学院研究优势结合

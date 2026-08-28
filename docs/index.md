@@ -36,8 +36,8 @@ features:
     title: AI Native 课程
     details: 课程本身用 Slidev + VitePress + GitHub Actions 构建，仓库完全开源，AI 友好。
   - icon: 🌏
-    title: 国际对标
-    details: 融合 MIT UAI、UMN、SJTU 等国际一流课程经验，本土案例 + 国际视野。
+    title: 学术根基
+    details: 直接引用一手论文与权威方法（Grounded AI / Generative Models / LLM 内部机理），而非二手转述。
 ---
 
 ## 🎯 课程地图

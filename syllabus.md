@@ -95,14 +95,14 @@
 - 三波浪潮：Chat → 推理 → Agent
 - **Grounded AI 三层**：数据接地 / 知识接地 / 反馈接地
 - 12 讲地图 · 考核方式 · 阅读材料 · Recitation 安排
-- **政策宣示**：Allowed with disclosure（学 UMN）
+- **政策宣示**：Allowed with disclosure（基于 Choi et al. 2025 教学实践）
 - 课堂演示：让 LLM 读懂《上海年度交通运行报告》并交叉验证
 
 **作业 0**：选定一个你关注的交通子领域，提交 1 段"问题陈述 + 数据来源"（≤500 字）
 
 ---
 
-### 第 2 讲｜LLM 内部机理【新增·学 SJTU】
+### 第 2 讲｜LLM 内部机理【独立成章】
 **核心问题**：LLM 到底是怎么"思考"的？
 
 - Tokenization（BPE / SentencePiece）
@@ -245,7 +245,7 @@
 
 ---
 
-### 第 11 讲｜评测：怎么知道 LLM 答得对【独立成章·学 SJTU】
+### 第 11 讲｜评测：怎么知道 LLM 答得对【独立成章】
 **核心问题**：Grounded 的"度"如何度量？
 
 - 评测范式：人工评测、自动化指标、LLM-as-Judge
@@ -289,16 +289,24 @@
 
 ## 六、关键政策
 
-### 1. Allowed with disclosure（学 UMN）
+### 1. Allowed with disclosure 政策
+参考 Choi et al. (2025) 的教学实践，鼓励学生在使用 GenAI 时充分披露：
+
 可用 GenAI 工具（ChatGPT、Claude、Cursor 等）协助完成作业，但：
 - **必须**在每次提交中说明：用了什么工具、用在哪一步、产出占比
 - 提交 `.ai-disclosure.md` 文件，记录每次会话摘要
 - 助教有权对作业进行 AI 使用情况抽查
 
-### 2. Grounded AI 原则（学 MIT）
+**参考来源**：Choi, S., Jin, Z., Ham, S. W., Kim, J., & Sun, L. (2025). *A gentle introduction and tutorial on deep generative models in transportation research*. Transportation Research Part C, 176, 105145.
+
+### 2. Grounded AI 原则
+Grounded AI 概念由 MIT Jinhua Zhao 团队提出，强调 LLM 输出扎根真实数据：
+
 - 所有项目必须挂真实数据集
 - 所有 LLM 输出必须能追溯到来源
 - 鼓励使用上海/同济本地数据
+
+**参考来源**：Zhao, J. et al. *Mens, Manus and Machina: How AI Impacts the Future of Work and Learning*. MIT Mobility Initiative.
 
 ### 3. 学术诚信
 - 抄袭作业 0 分
@@ -341,27 +349,35 @@
 
 ---
 
-## 八、与其他国际一流课程对比
+## 八、与其他课程设计对比
 
-| 维度 | 本课 | MIT UAI | UMN Choi | SJTU Wang |
+下表比较本课程与几门具有代表性的相关课程在**设计特点**上的异同（直接比较方法论层面）：
+
+| 维度 | 本课 | MIT UAI 课程 | UMN Choi 课程 | SJTU CS4650J |
 |---|---|---|---|---|
 | Grounded AI 主线 | ✅ | ✅ | ❌ | ❌ |
 | LLM 内部机理独立成章 | ✅ | ❌ | 部分 | ✅ |
 | Theory→Practice→Project | ✅ | ✅ | ✅ | ✅ |
 | 评测独立成章 | ✅ | ❌ | ❌ | ✅ |
-| Recitation × 4 | ✅ | ✅ | ❌ | ❌ |
+| Recitation 实验课 | ✅ | ✅ | ❌ | ❌ |
 | 课程仓库完全开源 | ✅ | ✅ | ❌ | ❌ |
 | 12 讲覆盖最广前沿 | ✅ | ❌ | ❌ | ❌ |
+
+> **参考课程链接**：
+> - MIT UAI Transportation: <https://learn.mit.edu/courses/course-v1:UAI_SOURCE+UAI.MLTL.1>
+> - UMN "Generative AI for Transportation Research": <https://www.linkedin.com/pulse/generative-ai-transportation-research-seongjin-choi-rdkkc/>
+> - SJTU CS4650J: <https://gc.sjtu.edu.cn/academics/courses/courses-by-number/course-info?id=85958>
 
 **定位**：国内第一门系统讲"**Grounded LLM for Transportation**"的研究生课。
 
 ---
 
-## 九、致谢
+## 九、设计灵感来源
 
-本课程设计参考了：
-- MIT Universal AI Transportation (Prof. Jinhua Zhao)
-- UMN "Generative AI for Transportation Research" (Prof. Seongjin Choi)
-- SJTU CS4650J "Large Language Model" (Prof. Shuo Wang)
+本课程在以下研究/教学工作的启发下形成（致谢）：
 
-参考但不限于以上，感谢所有开源贡献者。
+- **Grounded AI 思想**：Jinhua Zhao 教授团队（MIT Mobility Initiative）提出的"Grounded AI"概念
+- **生成式 AI 教学实践**：Seongjin Choi 教授（UMN）"Generative AI for Transportation Research" 课程的"Allowed with disclosure" 政策
+- **LLM 系统性教学**：Shuo Wang 教授（SJTU）CS4650J 课程的 LLM 全生命周期结构
+
+具体引用详见每节末尾的"参考来源"。本课程在内容、方法、政策上均参考但不限于以上工作，感谢所有开源贡献者。
