@@ -9,7 +9,7 @@ subtitle: Grounded LLM for Urban Transportation @ Tongji University
 
 ### LLM-Powered Urban Transportation Governance
 
-**同济大学交通学院 · 研究生课程（2026 秋季）**
+**同济大学交通学院 · 研究生课程（2026 秋季 · 嘉定 C208）**
 
 [![Course](https://img.shields.io/badge/课程-研究生-blue)](#)
 [![Lectures](https://img.shields.io/badge/讲次-12-green)](#lectures)

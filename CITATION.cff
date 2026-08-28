@@ -10,6 +10,11 @@ authors:
 date-released: 2026-09-18
 version: "1.0.0"
 doi: 10.0000/tongji-llm-urban-transport.2026.1.0
+keywords:
+  - LLM × 城市交通
+  - 嘉定校区 C208
+  - 周五 13:30-15:00
+  - 16 次课 / 24 学时
 url: "https://github.com/runningjian-ui/tongji-llm-urban-transport"
 license: CC-BY-SA-4.0
 keywords:
