@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this course in your research or teaching, please cite it as below."
+type: dataset
+title: "大模型驱动的城市交通治理技术 / LLM-Powered Urban Transportation Governance"
+authors:
+  - family-names: "Li"
+    given-names: "Jian"
+    affiliation: "Tongji University, School of Transportation Engineering"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+date-released: 2026-02-01
+version: "1.0.0"
+doi: 10.0000/tongji-llm-urban-transport.2026.1.0
+url: "https://github.com/runningjian-ui/tongji-llm-urban-transport"
+license: CC-BY-SA-4.0
+keywords:
+  - large language models
+  - urban transportation
+  - grounded AI
+  - AI native
+  - multi-agent systems
+  - retrieval-augmented generation
+  - autonomous driving
+  - course materials
+  - open education

@@ -1,0 +1,10 @@
+{
+  "name": "lecture-01-introduction",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "slidev slides.md --open",
+    "build": "slidev build slides.md --base /tongji-llm-urban-transport/slides/01/ --out ../../../dist/slides/01",
+    "export": "slidev export slides.md"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://github.com/runningjian-ui/tongji-llm-urban-transport/issues/new"
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "^https://github.com/runningjian-ui/tongji-llm-urban-transport/blob/main/(.*)$",
+      "replacement": "https://raw.githubusercontent.com/runningjian-ui/tongji-llm-urban-transport/main/$1"
+    }
+  ],
+  "httpStatusCodes": {
+    "403": "ignore",
+    "429": "warn"
+  },
+  "timeout": "20s",
+  "retryOn429": true,
+  "retryCount": 3
+}
